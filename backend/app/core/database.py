@@ -1,12 +1,40 @@
 """Database setup (placeholder)."""
 
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
-DATABASE_URL = "sqlite+aiosqlite:///./test.db"
-engine = create_async_engine(DATABASE_URL, echo=False)
-AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+from app.core.config import settings
 
-async def get_db():
+# Convert postgres:// → postgresql+asyncpg://
+DATABASE_URL = settings.DATABASE_URL.replace(
+    "postgresql://", "postgresql+asyncpg://"
+)
+
+engine = create_async_engine(
+    DATABASE_URL,
+    echo=settings.DEBUG,
+    pool_pre_ping=True,
+)
+
+AsyncSessionLocal = sessionmaker(
+    bind=engine,
+    class_=AsyncSession,
+    expire_on_commit=False,
+)
+
+
+class Base(DeclarativeBase):
+    pass
+
+
+async def get_db() -> AsyncSession:
+    """FastAPI dependency — yields a DB session per request."""
     async with AsyncSessionLocal() as session:
-        yield session
+        try:
+            yield session
+            await session.commit()
+        except Exception:
+            await session.rollback()
+            raise
+        finally:
+            await session.close()
