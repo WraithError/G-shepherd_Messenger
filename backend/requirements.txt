@@ -1,8 +1,0 @@
-fastapi
-uvicorn
-sqlalchemy
-alembic
-pydantic
-passlib[bcrypt]
-aiohttp
-aiosqlite
