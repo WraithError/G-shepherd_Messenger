@@ -225,11 +225,9 @@ curl http://localhost:8000/health
 
 ---
 
-## 👤 Author
+## 👤 Author - </>
 
-**Firdavs** — aka *Reaper* `</>`
-Junior Developer | Python & Flutter | Tashkent, Uzbekistan
-`WraithError` on GitHub — *One mind. Every tool.*
+Junior Developer | Python & Flutter | Tashkent, Uzbekistan on GitHub — **KOSIMOV FIRDAVS** as `WraithError`
 
 ---
 
