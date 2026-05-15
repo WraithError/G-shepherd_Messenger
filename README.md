@@ -1,6 +1,4 @@
-# 🐕 G-Shepherd
-
-> *Loyal. Protective. Built for Uzbekistan.*
+# G-Shepherd
 
 ![Status](https://img.shields.io/badge/Status-Foundation%20Established-brightgreen)
 ![Stage](https://img.shields.io/badge/Stage-2%20Stabilization-blue)
