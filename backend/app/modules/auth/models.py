@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import uuid
 from datetime import datetime, timezone
 
@@ -5,7 +7,13 @@ from sqlalchemy import Boolean, DateTime, ForeignKey, String, Text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from typing import TYPE_CHECKING
+
 from app.core.database import Base
+
+
+if TYPE_CHECKING:
+    from app.modules.chat.models import ConversationMember, Message
 
 
 def utcnow() -> datetime:

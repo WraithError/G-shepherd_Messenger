@@ -146,7 +146,7 @@ class MessageRepository:
             .where(
                 and_(
                     Message.conversation_id == conversation_id,
-                    Message.is_deleted == False,
+                    Message.is_deleted.is_(False),
                 )
             )
             .order_by(Message.created_at.desc())
