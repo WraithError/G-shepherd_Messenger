@@ -13,7 +13,7 @@ logger = get_logger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
-    logger.info(f"🐕 {settings.APP_NAME} starting up...")
+    logger.info(f"🔥 {settings.APP_NAME} starting up...")
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     logger.info("✅ Database tables ready")
